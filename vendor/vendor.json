@@ -1,0 +1,13 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "3+nFgtQjubS998RthmuhRqlCeak=",
+			"path": "github.com/paulormart/assert",
+			"revision": "703ecdc7e9afc63bcd95b090a10d6360fab36599",
+			"revisionTime": "2017-02-20T21:33:09Z"
+		}
+	],
+	"rootPath": "github.com/aukbit/twilio-go"
+}

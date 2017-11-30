@@ -1,0 +1,6 @@
+Version 0.1.0
+ - update vendor
+ - update gitignore
+ - create general get and post methods - phone number endpoint
+ - Initial commit
+
