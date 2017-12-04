@@ -1,3 +1,7 @@
+Version 0.2.0:
+ - add messages post endpoint
+ - Merge branch release-0.1.2
+
 Version 0.1.2:
  - fix error: parse error if status >= 400
  - Merge branch release-0.1.1
