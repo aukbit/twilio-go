@@ -12,11 +12,12 @@ import (
 func TestAvailablePhoneNumbers(t *testing.T) {
 	client := New(AccountSid(os.Getenv("TWILIO_ACCOUNT_SID")), AuthToken(os.Getenv("TWILIO_AUTH_TOKEN")))
 
-	resp, err := client.GetAvailablePhoneNumbersLocalByCountry("GB", url.Values{"InLocality": []string{"City of London"}})
+	resp, err := client.GetAvailablePhoneNumbersLocalByCountry("GB", url.Values{"InLocality": []string{"Brigton"}})
+	// resp, err := client.GetAvailablePhoneNumbersLocalByCountry("GB", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
-	assert.Equal(t, "/2010-04-01/Accounts/"+os.Getenv("TWILIO_ACCOUNT_SID")+"/AvailablePhoneNumbers/GB/Local.json?InLocality=City+of+London&MmsEnabled=false&SmsEnabled=true&VoiceEnabled=true", resp.Uri)
+	assert.Equal(t, "/2010-04-01/Accounts/"+os.Getenv("TWILIO_ACCOUNT_SID")+"/AvailablePhoneNumbers/GB/Local.json?MmsEnabled=false&SmsEnabled=true&VoiceEnabled=true", resp.Uri)
 	assert.Equal(t, true, len(resp.AvailablePhoneNumbers) > 0)
 }
 
@@ -51,4 +52,19 @@ func TestCreateAnAvailableNumber(t *testing.T) {
 		t.Fatal(err)
 	}
 	assert.Equal(t, true, incoming.Sid != "")
+}
+
+func TestDeleteAllIncomingNumbers(t *testing.T) {
+	client := New(AccountSid(os.Getenv("TWILIO_ACCOUNT_SID")), AuthToken(os.Getenv("TWILIO_AUTH_TOKEN")))
+	l, err := client.GetIncomingPhoneNumbersLocal(nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Printf("incoming numbers: %v", l.IncomingPhoneNumbers)
+	for _, n := range l.IncomingPhoneNumbers {
+		client.DeleteIncomingPhoneNumber(n.Sid)
+		if err != nil {
+			t.Fatal(err)
+		}
+	}
 }

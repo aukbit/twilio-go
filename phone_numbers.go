@@ -128,3 +128,15 @@ func (c *Client) CreateIncomingPhoneNumbersLocal(formValues url.Values) (*Incomi
 	return &i, nil
 
 }
+
+// DeleteIncomingPhoneNumber make DELETE request on twilio api
+// endpoint: /Accounts/[AccountSid]/IncomingPhoneNumbers/[IncomingPhoneNumberSid]
+func (c *Client) DeleteIncomingPhoneNumber(IncomingPhoneNumberSid string) *ResponseError {
+
+	var i IncomingPhoneNumbers
+	if err := c.delete(&i, fmt.Sprintf("%s/IncomingPhoneNumbers/%s.json", c.accountSid, IncomingPhoneNumberSid)); err != nil {
+		return err
+	}
+	return nil
+
+}

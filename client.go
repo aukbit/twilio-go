@@ -80,6 +80,20 @@ func (c *Client) post(out interface{}, url string, formValues url.Values) *Respo
 	return c.do(out, req)
 }
 
+func (c *Client) delete(out interface{}, url string) *ResponseError {
+	req, err := http.NewRequest("DELETE", DefaultEndpoint+url, nil)
+	if err != nil {
+		return &ResponseError{
+			Status:  http.StatusInternalServerError,
+			Message: err.Error(),
+		}
+	}
+	req.SetBasicAuth(c.accountSid, c.authToken)
+	// req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+
+	return c.do(out, req)
+}
+
 func (c *Client) do(out interface{}, r *http.Request) *ResponseError {
 	resp, err := c.httpClient.Do(r)
 	if err != nil {
