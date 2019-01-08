@@ -1,3 +1,7 @@
+Version 0.3.0:
+ - implement twilio access token
+ - Merge branch release-0.2.0
+
 Version 0.2.0:
  - add messages post endpoint
  - Merge branch release-0.1.2
